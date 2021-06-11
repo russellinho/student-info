@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Student Dashboard - Courses</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">Courses</h1>
+    <table style="margin-left: auto; margin-right: auto; width: 60%;">
+      <tr style="text-align: center;">
+        <th>
+            Prefix
+        </th>
+        <th>
+            Number
+        </th>
+        <th>
+            Enrolled Students
+        </th>
+        <th>
+            Max Students
+        </th>
+      </tr>
+        {% for course in allCourses %}
+      <tr style="text-align: center;">
+        <td>
+          {{ course.prefix }}
+        </td>
+        <td>
+          {{ course.number }}
+        </td>
+        <td>
+          {{ course.enrollee_count }}
+        </td>
+        <td>
+          {{ course.max_students }}
+        </td>
+      </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>

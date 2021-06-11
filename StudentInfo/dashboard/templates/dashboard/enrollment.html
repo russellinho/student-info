@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Student Dashboard - Enrollment</title>
+    </head>
+    <body style="text-align: center;">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <p style="color: red;">{{ message }}</p>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <p style="color: green;">{{ message }}</p>
+                {% endif %}
+            {% endfor %}
+        <br/>
+        {% endif %}
+        <h1>Enrollment</h1>
+        <form action="/dashboard/enrollment" method="get">
+            <label for="student">Select a student:</label>
+            <select name="student" id="student">
+                <option value="-1">Please select...</option>
+                {% for student in allStudents %}
+                    {% if selectedStudent and selectedStudent.id == student.id %}
+                        <option value={{ student.id }} selected>{{ student.last_name|upper }}, {{ student.first_name|upper }}</option>
+                    {% else %}
+                        <option value={{ student.id }}>{{ student.last_name|upper }}, {{ student.first_name|upper }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit" value="Go">
+        </form>
+        <br/>
+        <br/>
+        <div>
+            <table style="margin-left: auto; margin-right: auto; width: 50%;">
+                <tr style="text-align: center;">
+                  <th>
+                    Enrolled Courses
+                  </th>
+                </tr>
+                  {% if enrolledCourses != None %}
+                    {% for course in enrolledCourses %}
+                    <tr style="text-align: center;">
+                    <td>
+                        {{ course.prefix }}&nbsp;{{ course.number }}
+                    </td>
+                    </tr>
+                    {% endfor %}
+                  {% endif %}
+              </table>
+        </div>
+        <br/>
+        <br/>
+        {% if selectedStudent != None %}
+        <form action="/dashboard/enrollStudentInCourse" method="post">
+            {% csrf_token %}
+            <label for="course">Select a course:</label>
+            <input type="hidden" id="student" name="student" value={{selectedStudent.id}} />
+            <select name="course" id="course">
+                {% for course in allCourses %}
+                    <option value={{ course.id }}>{{ course.prefix }}{{ course.number }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Enroll">
+        </form>
+        {% endif %}
+    </body>
+</html>

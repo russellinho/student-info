@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Student Dashboard - Students</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">Students</h1>
+    <table style="margin-left: auto; margin-right: auto; width: 70%;">
+      <tr style="text-align: center;">
+        <th>
+          Last Name
+        </th>
+        <th>
+          First Name
+        </th>
+        <th>
+          Major
+        </th>
+        <th>
+          Year
+        </th>
+        <th>
+          GPA
+        </th>
+        <th>
+          Enrollment Date
+        </th>
+      </tr>
+        {% for student in allStudents %}
+      <tr style="text-align: center;">
+        <td>
+          {{ student.last_name|upper }}
+        </td>
+        <td>
+          {{ student.first_name|upper }}
+        </td>
+        <td>
+          {{ student.major|upper }}
+        </td>
+        <td>
+          {{ student.year }}
+        </td>
+        <td>
+          {{ student.gpa }}
+        </td>
+        <td>
+          {{ student.enroll_date }} EST
+        </td>
+      </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>
