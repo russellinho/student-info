@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Student Dashboard</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">Welcome, {{ myUsername }}!</h1>
+    <br/>
+    <br/>
+    <br/>
+    <table style="margin-left: auto; margin-right: auto; width: 80%;">
+        <tr>
+            <td style="text-align: left;">
+                <div><strong>Enrolled Students:</strong> {{ students }}</div><br/>
+                <div><strong>Number of Freshmen:</strong> {{ freshmen }}</div><br/>
+                <div><strong>Number of Sophomores:</strong> {{ sophomores }}</div><br/>
+                <div><strong>Number of Juniors:</strong> {{ juniors }}</div><br/>
+                <div><strong>Number of Seniors:</strong> {{ seniors }}</div><br/>
+                <div><strong>Average GPA:</strong> {{ gpa }}</div><br/>
+            </td>
+            <td style="text-align: left;">
+                <div><strong>Number of Courses Offered:</strong> {{ courses }}</div><br/>
+                <div><strong>Most Popular Courses:</strong><br/>
+                    <ol>
+                        <li>
+                            {{ course1 }}
+                        </li>
+                        <li>
+                            {{ course2 }}
+                        </li>
+                        <li>
+                            {{ course3 }}
+                        </li>
+                    </ol>
+                </div>
+            </td>
+        </tr>
+    </table>
+  </body>
+</html>

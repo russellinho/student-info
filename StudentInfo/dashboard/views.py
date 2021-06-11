@@ -1,3 +1,4 @@
+from functools import total_ordering
 from django import template
 from .models import Course, Student, Enrollee
 from django.shortcuts import render
@@ -7,7 +8,26 @@ from django.shortcuts import render
 from django.contrib import messages
 
 def index(request):
-    return HttpResponse("HELLO WORLD!")
+    # TODO: Replace this later with auth user
+    name = 'Admin'
+    allStudents = Student.objects.all()
+    allCourses = Course.objects.all()
+    for course in allCourses:
+        course.enrollees = len(Enrollee.objects.filter(course_id=course))
+    allCourses = sorted(allCourses, key=lambda course: course.enrollees, reverse=True)
+    freshmenCount = len(Student.objects.filter(year='Freshman'))
+    sophomoreCount = len(Student.objects.filter(year='Sophomore'))
+    juniorCount = len(Student.objects.filter(year='Junior'))
+    seniorCount = len(Student.objects.filter(year='Senior'))
+    totalGpa = 0.0
+    totalStudents = 0
+    for student in allStudents:
+        totalGpa += float(student.gpa)
+    if totalStudents == 0:
+        totalStudents = 1
+    context = {'myUsername': name, 'freshmen': freshmenCount, 'sophomores': sophomoreCount, 'juniors': juniorCount, 'seniors': seniorCount, 'students': totalStudents, 'gpa': totalGpa / totalStudents,
+            'courses': len(allCourses), 'course1': allCourses[0], 'course2': allCourses[1], 'course3': allCourses[2]}
+    return render(request, 'dashboard/home.html', context)
 
 def students(request):
     allStudents = Student.objects.order_by('-last_name')[:5]
