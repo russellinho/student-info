@@ -70,6 +70,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'StudentInfo.wsgi.application'
 
+LOGIN_URL = '/dashboard/login/'
+# LOGIN_REDIRECT_URL = '/dashboard'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

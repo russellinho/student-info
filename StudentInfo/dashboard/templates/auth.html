@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Student Dashboard</title>
+    </head>
+    <body>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <p style="color: red;">{{ message }}</p>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <p style="color: green;">{{ message }}</p>
+                {% endif %}
+            {% endfor %}
+        <br/>
+        {% endif %}
+        <h1>Login</h1>
+        <br/>
+        <br/>
+        <form style="text-align: center;" action="/dashboard/auth/" method="POST">
+            {% csrf_token %}
+            <label for="usernameInput">Username:</label>
+            <input type="text" id="usernameInput" name="usernameInput" value="" />
+            <br/>
+            <label for="passwordInput">Password:</label>
+            <input type="password" id="passwordInput" name="passwordInput" value="" />
+            <br/>
+            <input type="submit" value="Login" />
+        </form>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'dashboard/main.css' %}">
+    </head>
+    <div class="topnav">
+        {% if page == 0 %}
+            <a class="active" href="/dashboard/">Main</a>
+        {% else %}
+            <a href="/dashboard/">Main</a>
+        {% endif %}
+        {% if page == 1 %}
+            <a class="active" href="/dashboard/students/">Students</a>
+        {% else %}
+            <a href="/dashboard/students/">Students</a>
+        {% endif %}
+        {% if page == 2 %}
+            <a class="active" href="/dashboard/courses/">Courses</a>
+        {% else %}
+            <a href="/dashboard/courses/">Courses</a>
+        {% endif %}
+        {% if page == 3 %}
+            <a class="active" href="/dashboard/enrollment/">Enrollment</a>
+        {% else %}
+            <a href="/dashboard/enrollment/">Enrollment</a>
+        {% endif %}
+        <a class="logout" href="/dashboard/logout/">Log out</a>
+    </div>
+    {% block content %}
+    {% endblock %}
+</html>
